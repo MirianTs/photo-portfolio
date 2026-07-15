@@ -1,0 +1,13 @@
+.about {
+  max-width: 720px;
+}
+
+.about-text h3 {
+  font-size: clamp(24px, 3vw, 32px);
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  font-size: 17px;
+  line-height: 1.8;
+}

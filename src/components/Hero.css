@@ -1,0 +1,36 @@
+.hero {
+  min-height: 80svh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 720px;
+}
+
+.hero-title {
+  font-size: clamp(40px, 7vw, 72px);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.hero-text {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hero-cta:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
