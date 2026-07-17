@@ -15,6 +15,7 @@ function Navbar() {
     <header className="navbar">
       <div className="navbar-inner">
         <a href="#home" className="navbar-brand">
+          <span className="navbar-mark" aria-hidden="true" />
           Your Name
         </a>
 

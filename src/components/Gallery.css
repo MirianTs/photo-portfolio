@@ -2,7 +2,7 @@
   text-align: center;
   padding: 48px 24px;
   border: 1px dashed var(--border);
-  border-radius: 12px;
+  border-radius: 20px;
 }
 
 .gallery-empty code {
@@ -20,12 +20,13 @@
 }
 
 .gallery-filter {
-  padding: 8px 20px;
+  padding: 9px 20px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: transparent;
+  background: var(--bg-elevated);
   color: var(--text-dim);
   font-size: 14px;
+  font-weight: 500;
   text-transform: capitalize;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
@@ -37,9 +38,10 @@
 }
 
 .gallery-filter.is-active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  border-color: transparent;
   color: var(--bg);
+  font-weight: 600;
 }
 
 .gallery-grid {
@@ -54,11 +56,17 @@
   break-inside: avoid;
   margin-bottom: 16px;
   overflow: hidden;
-  border-radius: 10px;
-  border: none;
+  border-radius: 16px;
+  border: 1px solid var(--border);
   padding: 0;
   background: var(--bg-elevated);
   cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--accent);
+  box-shadow: var(--glow-shadow);
 }
 
 .gallery-item img {
@@ -78,14 +86,15 @@
 
 .gallery-item:hover img {
   filter: brightness(1.05);
-  transform: scale(1.02);
+  transform: scale(1.04);
 }
 
 .lightbox {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(6, 4, 12, 0.92);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +115,7 @@
   max-width: min(90vw, 1200px);
   max-height: 85vh;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: var(--shadow);
 }
 
@@ -126,12 +135,13 @@
   cursor: pointer;
   padding: 8px;
   opacity: 0.8;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, color 0.2s;
 }
 
 .lightbox-close:hover,
 .lightbox-nav:hover {
   opacity: 1;
+  color: var(--accent);
 }
 
 .lightbox-nav {

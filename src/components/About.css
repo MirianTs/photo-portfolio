@@ -1,13 +1,69 @@
 .about {
-  max-width: 720px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  align-items: stretch;
 }
 
-.about-text h3 {
+.about-card {
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: linear-gradient(160deg, var(--bg-elevated), var(--bg-elevated-2));
+  transition: border-color 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: var(--accent);
+}
+
+.about-card h3 {
   font-size: clamp(24px, 3vw, 32px);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
-.about-text p {
+.about-card p {
   font-size: 17px;
   line-height: 1.8;
+}
+
+.about-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.about-fact {
+  padding: 22px 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.about-fact:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.about-fact-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.about-fact-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+@media (max-width: 720px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
 }

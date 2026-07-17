@@ -3,6 +3,7 @@ import Hero from './components/Hero.jsx'
 import Gallery from './components/Gallery.jsx'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
+import Reveal from './components/Reveal.jsx'
 
 function App() {
   return (
@@ -14,20 +15,32 @@ function App() {
       </section>
 
       <section id="gallery" className="section">
-        <span className="eyebrow">Portfolio</span>
-        <h2 className="section-title">Gallery</h2>
+        <Reveal>
+          <span className="eyebrow">Portfolio</span>
+          <h2 className="section-title">
+            Captured <em>Moments</em>
+          </h2>
+        </Reveal>
         <Gallery />
       </section>
 
       <section id="about" className="section">
-        <span className="eyebrow">About</span>
-        <h2 className="section-title">Who I Am</h2>
+        <Reveal>
+          <span className="eyebrow">About</span>
+          <h2 className="section-title">
+            Who I <em>Am</em>
+          </h2>
+        </Reveal>
         <About />
       </section>
 
       <section id="contact" className="section">
-        <span className="eyebrow">Contact</span>
-        <h2 className="section-title">Get In Touch</h2>
+        <Reveal>
+          <span className="eyebrow">Contact</span>
+          <h2 className="section-title">
+            Let's <em>Connect</em>
+          </h2>
+        </Reveal>
         <Contact />
       </section>
     </>

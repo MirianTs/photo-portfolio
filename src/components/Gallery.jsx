@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import Reveal from './Reveal.jsx'
 import './Gallery.css'
 
 const modules = import.meta.glob('../photos/**/*.{jpg,jpeg,png,webp,gif}', {
@@ -57,7 +58,7 @@ function Gallery() {
   return (
     <>
       {categories.length > 1 && (
-        <div className="gallery-filters">
+        <Reveal as="div" className="gallery-filters">
           <button
             className={`gallery-filter ${filter === 'all' ? 'is-active' : ''}`}
             onClick={() => {
@@ -79,13 +80,15 @@ function Gallery() {
               {cat}
             </button>
           ))}
-        </div>
+        </Reveal>
       )}
 
       <div className="gallery-grid">
         {filtered.map((photo, i) => (
-          <button
+          <Reveal
+            as="button"
             key={photo.src}
+            delay={(i % 6) * 0.07}
             className="gallery-item"
             onClick={() => setActive(i)}
             aria-label={`Open ${photo.alt}`}
@@ -95,7 +98,7 @@ function Gallery() {
               alt={photo.alt}
               onLoad={(e) => e.currentTarget.classList.add('is-loaded')}
             />
-          </button>
+          </Reveal>
         ))}
       </div>
 
