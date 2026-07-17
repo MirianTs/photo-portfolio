@@ -8,7 +8,7 @@
   --shadow: rgba(0, 0, 0, 0.5) 0 20px 40px -10px;
 
   --sans: 'Segoe UI', system-ui, Roboto, sans-serif;
-  --heading: 'Segoe UI', system-ui, Roboto, sans-serif;
+  --heading: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 
   color-scheme: dark;
   font: 17px/1.6 var(--sans);
@@ -43,6 +43,7 @@ h2,
 h3 {
   font-family: var(--heading);
   font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--text);
   margin: 0;
 }
@@ -73,6 +74,18 @@ a {
 }
 
 .section-title {
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(28px, 4vw, 42px);
   margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
 }

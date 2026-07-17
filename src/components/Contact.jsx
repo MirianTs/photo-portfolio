@@ -2,31 +2,25 @@ import './Contact.css'
 
 function Contact() {
   return (
-    <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-      <div className="form-field">
-        <label htmlFor="name">Name</label>
-        <input id="name" name="name" type="text" placeholder="Your name" />
-      </div>
+    <div className="contact-info">
+      <p className="contact-lead">
+        Interested in working together, licensing a photo, or just want to say
+        hello? Reach out directly — replace these with your own details.
+      </p>
 
-      <div className="form-field">
-        <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="you@example.com" />
-      </div>
+      <a className="contact-email" href="mailto:you@example.com">
+        you@example.com
+      </a>
 
-      <div className="form-field">
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={5}
-          placeholder="Say hello..."
-        />
+      <div className="contact-socials">
+        <a href="#" target="_blank" rel="noreferrer">
+          Instagram
+        </a>
+        <a href="#" target="_blank" rel="noreferrer">
+          Behance
+        </a>
       </div>
-
-      <button type="submit" className="form-submit">
-        Send Message
-      </button>
-    </form>
+    </div>
   )
 }
 
