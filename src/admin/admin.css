@@ -1,0 +1,188 @@
+.admin-shell {
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.admin-center {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.admin-login {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-elevated);
+}
+
+.admin-login h1 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.admin-login input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font: inherit;
+}
+
+.admin-login input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.admin-login button {
+  margin-top: 6px;
+}
+
+.admin-error {
+  color: #f87171;
+  font-size: 14px;
+}
+
+.admin-dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.admin-header h1 {
+  font-size: 26px;
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.admin-btn:hover {
+  opacity: 0.9;
+}
+
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-btn-ghost {
+  background: transparent;
+  color: var(--text);
+}
+
+.admin-btn-danger {
+  background: transparent;
+  color: #f87171;
+  border-color: #f87171;
+  font-size: 13px;
+  padding: 6px 14px;
+}
+
+.admin-upload {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-upload input[type='text'] {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 18px;
+  color: var(--text);
+  font: inherit;
+  min-width: 220px;
+}
+
+.admin-upload input[type='text']:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.admin-hint {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.admin-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-card:active {
+  cursor: grabbing;
+}
+
+.admin-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-card-category {
+  margin: 10px 10px 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.admin-card-category:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.admin-card .admin-btn-danger {
+  margin: 0 10px 10px;
+}
+
+@media (max-width: 640px) {
+  .admin-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

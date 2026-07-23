@@ -1,35 +1,45 @@
 import { useEffect, useMemo, useState } from 'react'
+import { supabase } from '../lib/supabaseClient.js'
 import Reveal from './Reveal.jsx'
 import './Gallery.css'
 
-const modules = import.meta.glob('../photos/**/*.{jpg,jpeg,png,webp,gif}', {
-  eager: true,
-  import: 'default',
-})
-
-const photos = Object.keys(modules)
-  .sort()
-  .map((path) => {
-    const relative = path.replace('../photos/', '')
-    const parts = relative.split('/')
-    const category = parts.length > 1 ? parts[0] : 'uncategorized'
-    const filename = parts[parts.length - 1]
-    return {
-      src: modules[path],
-      alt: filename.replace(/\.[^/.]+$/, ''),
-      category,
-    }
-  })
-
-const categories = [...new Set(photos.map((p) => p.category))]
-
 function Gallery() {
+  const [photos, setPhotos] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(false)
   const [filter, setFilter] = useState('all')
   const [active, setActive] = useState(null)
 
+  useEffect(() => {
+    let cancelled = false
+
+    supabase
+      .from('photos')
+      .select('*')
+      .order('position', { ascending: true })
+      .then(({ data, error }) => {
+        if (cancelled) return
+        if (error) setLoadError(true)
+        else setPhotos(data || [])
+        setLoading(false)
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setLoadError(true)
+          setLoading(false)
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const categories = useMemo(() => [...new Set(photos.map((p) => p.category))], [photos])
+
   const filtered = useMemo(
     () => (filter === 'all' ? photos : photos.filter((p) => p.category === filter)),
-    [filter],
+    [filter, photos],
   )
 
   useEffect(() => {
@@ -45,12 +55,18 @@ function Gallery() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [active, filtered.length])
 
+  if (loading) {
+    return <p className="gallery-empty">Loading photos…</p>
+  }
+
+  if (loadError) {
+    return <p className="gallery-empty">Couldn't load photos right now — try refreshing.</p>
+  }
+
   if (photos.length === 0) {
     return (
       <p className="gallery-empty">
-        No photos yet — drop .jpg/.png files into <code>src/photos</code> (put
-        them in subfolders like <code>src/photos/nature</code> to group them
-        into categories) and they'll show up here automatically.
+        No photos yet — head to <code>/admin</code> to upload your first ones.
       </p>
     )
   }
@@ -87,15 +103,15 @@ function Gallery() {
         {filtered.map((photo, i) => (
           <Reveal
             as="button"
-            key={photo.src}
+            key={photo.id}
             delay={(i % 6) * 0.07}
             className="gallery-item"
             onClick={() => setActive(i)}
-            aria-label={`Open ${photo.alt}`}
+            aria-label="Open photo"
           >
             <img
-              src={photo.src}
-              alt={photo.alt}
+              src={photo.url}
+              alt=""
               onLoad={(e) => e.currentTarget.classList.add('is-loaded')}
             />
           </Reveal>
@@ -119,8 +135,8 @@ function Gallery() {
           </button>
           <img
             className="lightbox-image"
-            src={filtered[active].src}
-            alt={filtered[active].alt}
+            src={filtered[active].url}
+            alt=""
             onClick={(e) => e.stopPropagation()}
           />
           <button
