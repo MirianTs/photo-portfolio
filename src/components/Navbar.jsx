@@ -16,7 +16,7 @@ function Navbar() {
       <div className="navbar-inner">
         <a href="#home" className="navbar-brand">
           <span className="navbar-mark" aria-hidden="true" />
-          Your Name
+          Mirian Tsartsidze
         </a>
 
         <button

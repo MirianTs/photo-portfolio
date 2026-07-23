@@ -13,7 +13,7 @@ function Hero() {
       </Reveal>
 
       <Reveal as="h1" className="hero-title" delay={0.1}>
-        Your Name — I tell stories through <em>light &amp; motion</em>.
+        Mirian Tsartsidze — I tell stories through <em>light &amp; motion</em>.
       </Reveal>
 
       <Reveal delay={0.2}>
