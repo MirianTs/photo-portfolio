@@ -49,6 +49,18 @@
   column-gap: 16px;
 }
 
+@media (min-width: 1600px) {
+  .gallery-grid {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 2000px) {
+  .gallery-grid {
+    column-count: 5;
+  }
+}
+
 .gallery-item {
   position: relative;
   display: block;

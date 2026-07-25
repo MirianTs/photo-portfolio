@@ -3,7 +3,7 @@
   top: 16px;
   z-index: 100;
   width: calc(100% - 32px);
-  max-width: 1200px;
+  max-width: min(1680px, 94vw);
   margin: 16px auto 0;
   background: rgba(21, 15, 34, 0.65);
   backdrop-filter: blur(16px);
