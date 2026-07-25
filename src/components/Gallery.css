@@ -170,7 +170,29 @@
     column-count: 1;
   }
 
+  .lightbox {
+    padding: 16px;
+  }
+
+  .lightbox-image {
+    max-width: calc(100vw - 96px);
+  }
+
   .lightbox-nav {
-    font-size: 32px;
+    font-size: 26px;
+    padding: 6px;
+  }
+
+  .lightbox-prev {
+    left: 4px;
+  }
+
+  .lightbox-next {
+    right: 4px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 16px;
   }
 }
