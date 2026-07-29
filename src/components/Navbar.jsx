@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import logo from '../assets/logo.JPG'
 import './Navbar.css'
 
 const links = [
@@ -15,7 +16,7 @@ function Navbar() {
     <header className="navbar">
       <div className="navbar-inner">
         <a href="#home" className="navbar-brand">
-          <span className="navbar-mark" aria-hidden="true" />
+          <img src={logo} className="navbar-mark" alt="" aria-hidden="true" />
           Mirian Tsartsidze
         </a>
 

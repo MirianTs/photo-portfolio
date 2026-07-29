@@ -31,10 +31,11 @@
 }
 
 .navbar-mark {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  object-fit: cover;
+  object-position: center 35%;
   box-shadow: 0 0 16px rgba(185, 140, 255, 0.6);
 }
 
