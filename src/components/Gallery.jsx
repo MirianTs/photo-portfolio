@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 import Reveal from './Reveal.jsx'
 import './Gallery.css'
@@ -12,6 +12,7 @@ function Gallery() {
   const [loadError, setLoadError] = useState(false)
   const [filter, setFilter] = useState('all')
   const [active, setActive] = useState(null)
+  const closeButtonRef = useRef(null)
 
   useEffect(() => {
     let cancelled = false
@@ -66,6 +67,17 @@ function Gallery() {
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = previous
+    }
+  }, [isOpen])
+
+  // Move keyboard focus into the lightbox when it opens and give it back to
+  // the thumbnail that opened it when it closes.
+  useEffect(() => {
+    if (!isOpen) return
+    const opener = document.activeElement
+    closeButtonRef.current?.focus()
+    return () => {
+      if (opener instanceof HTMLElement) opener.focus()
     }
   }, [isOpen])
 
@@ -152,6 +164,7 @@ function Gallery() {
           onClick={() => setActive(null)}
         >
           <button
+            ref={closeButtonRef}
             className="lightbox-close"
             aria-label="Close photo viewer"
             onClick={(e) => {
