@@ -166,6 +166,7 @@ function Dashboard() {
         <input
           type="text"
           placeholder="Category (e.g. nature, street)"
+          aria-label="Category for new uploads"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
@@ -210,6 +211,7 @@ function Dashboard() {
             <input
               type="text"
               className="admin-card-category"
+              aria-label="Photo category"
               value={photo.category}
               onChange={(e) => handleCategoryChange(photo, e.target.value)}
               onBlur={() => handleCategorySave(photo)}
