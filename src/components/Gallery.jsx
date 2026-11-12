@@ -56,7 +56,11 @@ function Gallery() {
   }, [active, filtered.length])
 
   if (loading) {
-    return <p className="gallery-empty">Loading photos…</p>
+    return (
+      <p className="gallery-empty" role="status">
+        Loading photos…
+      </p>
+    )
   }
 
   if (loadError) {
