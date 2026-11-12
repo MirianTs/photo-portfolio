@@ -111,6 +111,7 @@ function Gallery() {
           >
             <img
               src={photo.url}
+              loading="lazy"
               alt=""
               onLoad={(e) => e.currentTarget.classList.add('is-loaded')}
             />
