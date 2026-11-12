@@ -64,7 +64,11 @@ function Gallery() {
   }
 
   if (loadError) {
-    return <p className="gallery-empty">Couldn't load photos right now — try refreshing.</p>
+    return (
+      <p className="gallery-empty" role="alert">
+        Couldn't load photos right now — try refreshing.
+      </p>
+    )
   }
 
   if (photos.length === 0) {
