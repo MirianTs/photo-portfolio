@@ -41,40 +41,45 @@ function Dashboard() {
       ? Math.max(...photos.map((p) => p.position)) + 1
       : 0
 
-    for (const file of files) {
-      const cleanCategory = category.trim() || 'uncategorized'
-      const storagePath = `${safePathPart(cleanCategory)}/${crypto.randomUUID()}-${safePathPart(file.name)}`
+    try {
+      for (const file of files) {
+        const cleanCategory = category.trim() || 'uncategorized'
+        const storagePath = `${safePathPart(cleanCategory)}/${crypto.randomUUID()}-${safePathPart(file.name)}`
 
-      const { error: uploadError } = await supabase.storage
-        .from('photos')
-        .upload(storagePath, file)
+        const { error: uploadError } = await supabase.storage
+          .from('photos')
+          .upload(storagePath, file)
 
-      if (uploadError) {
-        setError(uploadError.message)
-        continue
+        if (uploadError) {
+          setError(uploadError.message)
+          continue
+        }
+
+        const { data: urlData } = supabase.storage.from('photos').getPublicUrl(storagePath)
+
+        const { error: insertError } = await supabase.from('photos').insert({
+          url: urlData.publicUrl,
+          storage_path: storagePath,
+          category: cleanCategory,
+          position: nextPosition,
+        })
+
+        if (insertError) {
+          setError(insertError.message)
+          // Without a row the file would never show up, so don't leave it in storage.
+          await supabase.storage.from('photos').remove([storagePath])
+          continue
+        }
+        nextPosition += 1
       }
-
-      const { data: urlData } = supabase.storage.from('photos').getPublicUrl(storagePath)
-
-      const { error: insertError } = await supabase.from('photos').insert({
-        url: urlData.publicUrl,
-        storage_path: storagePath,
-        category: cleanCategory,
-        position: nextPosition,
-      })
-
-      if (insertError) {
-        setError(insertError.message)
-        // Without a row the file would never show up, so don't leave it in storage.
-        await supabase.storage.from('photos').remove([storagePath])
-        continue
-      }
-      nextPosition += 1
+    } catch (err) {
+      // A dropped connection throws instead of returning an error object.
+      setError(err instanceof Error ? err.message : 'Upload failed.')
+    } finally {
+      setUploading(false)
+      e.target.value = ''
+      loadPhotos()
     }
-
-    setUploading(false)
-    e.target.value = ''
-    loadPhotos()
   }
 
   const handleDelete = async (photo) => {
