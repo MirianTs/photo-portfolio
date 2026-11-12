@@ -19,9 +19,11 @@ function Contact() {
       <div className="contact-socials">
         <a href="https://www.instagram.com/fury_cyber/" target="_blank" rel="noreferrer">
           Instagram
+          <span className="visually-hidden"> (opens in a new tab)</span>
         </a>
         <a href="#" target="_blank" rel="noreferrer">
           Behance
+          <span className="visually-hidden"> (opens in a new tab)</span>
         </a>
       </div>
     </Reveal>
