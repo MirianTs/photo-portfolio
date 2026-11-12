@@ -4,8 +4,8 @@ import './Hero.css'
 function Hero() {
   return (
     <div className="hero">
-      <div className="glow-blob hero-glow-1" />
-      <div className="glow-blob hero-glow-2" />
+      <div className="glow-blob hero-glow-1" aria-hidden="true" />
+      <div className="glow-blob hero-glow-2" aria-hidden="true" />
 
       <Reveal className="hero-badge">
         <span className="hero-badge-dot" />

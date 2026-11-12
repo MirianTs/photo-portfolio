@@ -4,7 +4,7 @@ import './Contact.css'
 function Contact() {
   return (
     <Reveal as="div" className="contact-info">
-      <div className="glow-blob contact-glow" />
+      <div className="glow-blob contact-glow" aria-hidden="true" />
 
       <p className="contact-lead">
         Interested in working together, licensing a photo, or just want to say{' '}
