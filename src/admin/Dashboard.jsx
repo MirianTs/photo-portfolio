@@ -108,7 +108,14 @@ function Dashboard() {
   }
 
   const handleCategorySave = async (photo) => {
-    await supabase.from('photos').update({ category: photo.category }).eq('id', photo.id)
+    // Same rule as uploads: a blank category falls back to "uncategorized".
+    const cleanCategory = photo.category.trim() || 'uncategorized'
+    if (cleanCategory !== photo.category) handleCategoryChange(photo, cleanCategory)
+    const { error: updateError } = await supabase
+      .from('photos')
+      .update({ category: cleanCategory })
+      .eq('id', photo.id)
+    if (updateError) setError(updateError.message)
   }
 
   const handleDragStart = (index) => {
