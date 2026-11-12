@@ -107,7 +107,7 @@ function Gallery() {
             delay={(i % 6) * 0.07}
             className="gallery-item"
             onClick={() => setActive(i)}
-            aria-label="Open photo"
+            aria-label={`Open ${photo.category} photo ${i + 1} of ${filtered.length}`}
           >
             <img
               src={photo.url}
