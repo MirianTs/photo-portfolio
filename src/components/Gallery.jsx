@@ -137,7 +137,7 @@ function Gallery() {
           <img
             className="lightbox-image"
             src={filtered[active].url}
-            alt=""
+            alt={`${filtered[active].category} photo ${active + 1} of ${filtered.length}`}
             onClick={(e) => e.stopPropagation()}
           />
           <button
