@@ -60,7 +60,7 @@ Keep real values in `.env` (ignored by git), never in `.env.example`.
 
 ## Admin panel
 
-Open `/photo-portfolio/admin` (or `/admin` path on the dev server) and sign in
+Open `/photo-portfolio/admin` (the same path on the dev server) and sign in
 with the Supabase user. From there you can:
 
 - upload one or more photos into a category,
