@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import logo from '../assets/logo.JPG'
 import './Navbar.css'
 
@@ -11,6 +11,7 @@ const links = [
 
 function Navbar() {
   const [open, setOpen] = useState(false)
+  const headerRef = useRef(null)
 
   // Let keyboard users close the mobile menu with Escape.
   useEffect(() => {
@@ -22,8 +23,18 @@ function Navbar() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [open])
 
+  // Close the mobile menu when the user taps anywhere outside the navbar.
+  useEffect(() => {
+    if (!open) return
+    const onPointerDown = (e) => {
+      if (!headerRef.current?.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [open])
+
   return (
-    <header className="navbar">
+    <header className="navbar" ref={headerRef}>
       <div className="navbar-inner">
         <a href="#home" className="navbar-brand">
           <img src={logo} className="navbar-mark" alt="" aria-hidden="true" />
