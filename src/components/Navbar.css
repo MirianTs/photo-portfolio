@@ -111,12 +111,17 @@
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.25s ease, opacity 0.2s ease;
+    /* visibility keeps the hidden links out of the Tab order; it flips only
+       after the closing animation has finished */
+    visibility: hidden;
+    transition: max-height 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
   }
 
   .navbar-links.is-open {
     max-height: 300px;
     opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
   }
 
   .navbar-links a {
