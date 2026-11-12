@@ -75,3 +75,16 @@ and publishes `dist/` to GitHub Pages. The workflow reads the Supabase values
 from the repository secrets `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 It also copies `index.html` to `404.html` so that direct visits to `/admin`
 load the app instead of a GitHub 404 page.
+
+## Project structure
+
+```
+index.html            HTML shell, meta tags and fonts
+src/main.jsx          Entry point; picks the public site or the admin panel
+src/App.jsx           Public page layout (sections)
+src/components/       Navbar, Hero, Gallery, About, Contact, Reveal
+src/admin/            Admin login and dashboard
+src/lib/              Supabase client
+supabase/schema.sql   Database table and access policies
+public/               Static files copied as-is (favicons)
+```
