@@ -69,3 +69,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-fact:hover {
+    transform: none;
+  }
+}

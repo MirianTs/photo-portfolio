@@ -129,3 +129,11 @@
   transform: translateY(-2px);
   box-shadow: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta:hover,
+  .hero-cta-ghost:hover,
+  .hero-cta:hover .hero-cta-arrow {
+    transform: none;
+  }
+}
