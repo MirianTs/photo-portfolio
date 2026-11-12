@@ -15,7 +15,7 @@ function Gallery() {
 
     supabase
       .from('photos')
-      .select('*')
+      .select('id, url, category')
       .order('position', { ascending: true })
       .then(({ data, error }) => {
         if (cancelled) return
