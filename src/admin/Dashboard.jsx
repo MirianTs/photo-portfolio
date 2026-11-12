@@ -99,11 +99,16 @@ function Dashboard() {
     setPhotos((prev) => prev.filter((p) => p.id !== photo.id))
   }
 
-  const handleCategoryChange = async (photo, newCategory) => {
+  // Typing only updates the card; the new category is saved once the field
+  // loses focus, instead of sending one database write per keystroke.
+  const handleCategoryChange = (photo, newCategory) => {
     setPhotos((prev) =>
       prev.map((p) => (p.id === photo.id ? { ...p, category: newCategory } : p)),
     )
-    await supabase.from('photos').update({ category: newCategory }).eq('id', photo.id)
+  }
+
+  const handleCategorySave = async (photo) => {
+    await supabase.from('photos').update({ category: photo.category }).eq('id', photo.id)
   }
 
   const handleDragStart = (index) => {
@@ -192,6 +197,7 @@ function Dashboard() {
               className="admin-card-category"
               value={photo.category}
               onChange={(e) => handleCategoryChange(photo, e.target.value)}
+              onBlur={() => handleCategorySave(photo)}
             />
             <button className="admin-btn admin-btn-danger" onClick={() => handleDelete(photo)}>
               Delete
