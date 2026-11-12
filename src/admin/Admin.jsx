@@ -10,7 +10,12 @@ function Admin() {
   useEffect(() => {
     if (!supabase) return
 
-    supabase.auth.getSession().then(({ data }) => setSession(data.session))
+    // If the session check fails (e.g. offline), fall back to the login form
+    // instead of showing "Loading…" forever.
+    supabase.auth
+      .getSession()
+      .then(({ data }) => setSession(data.session))
+      .catch(() => setSession(null))
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession)
