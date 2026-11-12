@@ -208,3 +208,14 @@
     right: 16px;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox {
+    animation: none;
+  }
+
+  .gallery-item img,
+  .gallery-item:hover img {
+    transform: none;
+  }
+}
