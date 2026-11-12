@@ -28,6 +28,7 @@
 }
 
 .about-facts {
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
@@ -57,6 +58,7 @@
 }
 
 .about-fact-value {
+  margin: 0;
   font-size: 18px;
   font-weight: 600;
   color: var(--text);

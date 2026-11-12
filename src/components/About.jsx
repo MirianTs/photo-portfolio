@@ -22,14 +22,14 @@ function About() {
         </p>
       </Reveal>
 
-      <div className="about-facts">
+      <dl className="about-facts">
         {facts.map((fact, i) => (
           <Reveal as="div" key={fact.label} delay={0.1 + i * 0.08} className="about-fact">
-            <span className="about-fact-label">{fact.label}</span>
-            <span className="about-fact-value">{fact.value}</span>
+            <dt className="about-fact-label">{fact.label}</dt>
+            <dd className="about-fact-value">{fact.value}</dd>
           </Reveal>
         ))}
-      </div>
+      </dl>
     </div>
   )
 }
