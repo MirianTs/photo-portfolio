@@ -40,6 +40,8 @@ function Gallery() {
     }
   }, [])
 
+  // Filter buttons follow the order categories first appear in the gallery,
+  // which is the order set by dragging photos in the admin panel.
   const categories = useMemo(() => [...new Set(photos.map((p) => p.category))], [photos])
 
   const filtered = useMemo(
@@ -163,6 +165,8 @@ function Gallery() {
           <Reveal
             as="button"
             key={photo.id}
+            // Stagger the fade-in in small groups so photos far down the
+            // list do not wait seconds for their turn.
             delay={(i % 6) * 0.07}
             className="gallery-item"
             onClick={() => setActive(i)}
