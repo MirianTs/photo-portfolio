@@ -178,7 +178,7 @@ function Dashboard() {
             multiple
             onChange={handleUpload}
             disabled={uploading}
-            hidden
+            className="visually-hidden"
           />
         </label>
       </section>
