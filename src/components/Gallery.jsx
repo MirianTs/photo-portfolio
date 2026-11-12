@@ -3,6 +3,9 @@ import { supabase } from '../lib/supabaseClient.js'
 import Reveal from './Reveal.jsx'
 import './Gallery.css'
 
+// Step through the photos in a loop: past the last one comes the first again.
+const wrapIndex = (index, length) => (index + length) % length
+
 function Gallery() {
   const [photos, setPhotos] = useState([])
   const [loading, setLoading] = useState(true)
@@ -47,8 +50,8 @@ function Gallery() {
 
     const onKeyDown = (e) => {
       if (e.key === 'Escape') setActive(null)
-      if (e.key === 'ArrowRight') setActive((i) => (i + 1) % filtered.length)
-      if (e.key === 'ArrowLeft') setActive((i) => (i - 1 + filtered.length) % filtered.length)
+      if (e.key === 'ArrowRight') setActive((i) => wrapIndex(i + 1, filtered.length))
+      if (e.key === 'ArrowLeft') setActive((i) => wrapIndex(i - 1, filtered.length))
     }
 
     window.addEventListener('keydown', onKeyDown)
@@ -145,7 +148,7 @@ function Gallery() {
             aria-label="Previous"
             onClick={(e) => {
               e.stopPropagation()
-              setActive((i) => (i - 1 + filtered.length) % filtered.length)
+              setActive((i) => wrapIndex(i - 1, filtered.length))
             }}
           >
             ‹
@@ -161,7 +164,7 @@ function Gallery() {
             aria-label="Next"
             onClick={(e) => {
               e.stopPropagation()
-              setActive((i) => (i + 1) % filtered.length)
+              setActive((i) => wrapIndex(i + 1, filtered.length))
             }}
           >
             ›
