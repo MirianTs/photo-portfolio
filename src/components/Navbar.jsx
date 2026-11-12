@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from '../assets/logo.JPG'
 import './Navbar.css'
 
@@ -11,6 +11,16 @@ const links = [
 
 function Navbar() {
   const [open, setOpen] = useState(false)
+
+  // Let keyboard users close the mobile menu with Escape.
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
   return (
     <header className="navbar">
