@@ -77,6 +77,7 @@ function Gallery() {
         <Reveal as="div" className="gallery-filters">
           <button
             className={`gallery-filter ${filter === 'all' ? 'is-active' : ''}`}
+            aria-pressed={filter === 'all'}
             onClick={() => {
               setFilter('all')
               setActive(null)
@@ -88,6 +89,7 @@ function Gallery() {
             <button
               key={cat}
               className={`gallery-filter ${filter === cat ? 'is-active' : ''}`}
+              aria-pressed={filter === cat}
               onClick={() => {
                 setFilter(cat)
                 setActive(null)
