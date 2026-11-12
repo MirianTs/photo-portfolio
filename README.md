@@ -27,3 +27,12 @@ npm run dev
 
 The dev server prints a local URL; the site is served under `/photo-portfolio/`
 because of the `base` setting in `vite.config.js`.
+
+## Scripts
+
+| Command           | What it does                              |
+| ----------------- | ----------------------------------------- |
+| `npm run dev`     | Start the Vite dev server with hot reload |
+| `npm run build`   | Build the production site into `dist/`    |
+| `npm run preview` | Serve the built `dist/` folder locally    |
+| `npm run lint`    | Run Oxlint over the project               |
