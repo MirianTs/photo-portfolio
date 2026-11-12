@@ -145,7 +145,7 @@ function Dashboard() {
       {error && <p className="admin-error">{error}</p>}
 
       {loading ? (
-        <p>Loading photos…</p>
+        <p role="status">Loading photos…</p>
       ) : photos.length === 0 ? (
         <p>No photos yet — upload some above.</p>
       ) : (

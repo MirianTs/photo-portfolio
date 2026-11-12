@@ -35,7 +35,7 @@ function Admin() {
   if (session === undefined) {
     return (
       <div className="admin-shell admin-center">
-        <p>Loading…</p>
+        <p role="status">Loading…</p>
       </div>
     )
   }
