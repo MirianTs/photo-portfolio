@@ -48,3 +48,12 @@ read at build time by Vite:
 | `VITE_SUPABASE_ANON_KEY` | Public anon key for the project |
 
 Keep real values in `.env` (ignored by git), never in `.env.example`.
+
+## Supabase setup
+
+1. Create a public storage bucket named `photos` (Storage > New bucket).
+2. Open the SQL Editor and run [`supabase/schema.sql`](supabase/schema.sql).
+   It creates the `photos` table and the row-level security policies for the
+   table and the bucket.
+3. Create an admin user under Authentication > Users. Any signed-in user can
+   manage photos, so only add accounts you trust.
