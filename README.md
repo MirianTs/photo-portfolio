@@ -36,3 +36,15 @@ because of the `base` setting in `vite.config.js`.
 | `npm run build`   | Build the production site into `dist/`    |
 | `npm run preview` | Serve the built `dist/` folder locally    |
 | `npm run lint`    | Run Oxlint over the project               |
+
+## Environment variables
+
+Both values come from the Supabase dashboard (Project Settings > API) and are
+read at build time by Vite:
+
+| Variable                 | Purpose                         |
+| ------------------------ | ------------------------------- |
+| `VITE_SUPABASE_URL`      | URL of the Supabase project     |
+| `VITE_SUPABASE_ANON_KEY` | Public anon key for the project |
+
+Keep real values in `.env` (ignored by git), never in `.env.example`.
