@@ -7,6 +7,12 @@ function Reveal({ as: Tag = 'div', delay = 0, className = '', children, ...rest 
     const node = ref.current
     if (!node) return
 
+    // Old browsers without IntersectionObserver: show the content right away.
+    if (!('IntersectionObserver' in window)) {
+      node.classList.add('is-visible')
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
