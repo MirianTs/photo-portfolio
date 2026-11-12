@@ -1,4 +1,5 @@
 -- Run this once in the Supabase SQL Editor (Project > SQL Editor > New query)
+-- The table and index are safe to re-run; the policies are not (create policy fails if one already exists).
 
 create table if not exists photos (
   id uuid primary key default gen_random_uuid(),
