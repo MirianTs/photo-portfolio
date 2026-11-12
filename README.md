@@ -14,3 +14,16 @@ and managed through a small admin panel.
 - [Supabase](https://supabase.com/) for the photo table, file storage and admin login
 - [Oxlint](https://oxc.rs/) for linting
 - GitHub Actions + GitHub Pages for deployment
+
+## Getting started
+
+Requirements: Node.js 20 or newer.
+
+```sh
+npm install
+cp .env.example .env   # then fill in your Supabase project values
+npm run dev
+```
+
+The dev server prints a local URL; the site is served under `/photo-portfolio/`
+because of the `base` setting in `vite.config.js`.
