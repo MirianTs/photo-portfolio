@@ -23,6 +23,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      # Stop the deploy if the linter finds problems.
+      - run: npm run lint
       - run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
