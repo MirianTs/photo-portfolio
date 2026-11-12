@@ -68,8 +68,14 @@ function Dashboard() {
 
   const handleDelete = async (photo) => {
     if (!confirm('Delete this photo?')) return
+    setError('')
+    const { error: deleteError } = await supabase.from('photos').delete().eq('id', photo.id)
+    if (deleteError) {
+      setError(deleteError.message)
+      return
+    }
+    // Only remove the file once the row is gone, so the gallery never points at a missing file.
     await supabase.storage.from('photos').remove([photo.storage_path])
-    await supabase.from('photos').delete().eq('id', photo.id)
     setPhotos((prev) => prev.filter((p) => p.id !== photo.id))
   }
 
