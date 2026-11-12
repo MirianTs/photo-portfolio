@@ -12,7 +12,7 @@ function Hero() {
         Available for shoots
       </Reveal>
 
-      <Reveal as="h1" className="hero-title" delay={0.1}>
+      <Reveal as="h1" id="hero-title" className="hero-title" delay={0.1}>
         Mirian Tsartsidze — I tell stories through <em>light &amp; motion</em>.
       </Reveal>
 
