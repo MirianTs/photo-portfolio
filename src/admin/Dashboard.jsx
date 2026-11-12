@@ -91,7 +91,11 @@ function Dashboard() {
       return
     }
     // Only remove the file once the row is gone, so the gallery never points at a missing file.
-    await supabase.storage.from('photos').remove([photo.storage_path])
+    const { error: removeError } = await supabase.storage
+      .from('photos')
+      .remove([photo.storage_path])
+    // The photo is already gone from the gallery; just report the leftover file.
+    if (removeError) setError(`Photo removed, but its file was not deleted: ${removeError.message}`)
     setPhotos((prev) => prev.filter((p) => p.id !== photo.id))
   }
 
