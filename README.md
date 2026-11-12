@@ -57,3 +57,13 @@ Keep real values in `.env` (ignored by git), never in `.env.example`.
    table and the bucket.
 3. Create an admin user under Authentication > Users. Any signed-in user can
    manage photos, so only add accounts you trust.
+
+## Admin panel
+
+Open `/photo-portfolio/admin` (or `/admin` path on the dev server) and sign in
+with the Supabase user. From there you can:
+
+- upload one or more photos into a category,
+- rename a photo's category,
+- drag cards to change the gallery order,
+- delete photos (removes both the file and the database row).
