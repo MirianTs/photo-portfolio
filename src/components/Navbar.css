@@ -80,6 +80,8 @@
   transition: transform 0.2s, opacity 0.2s;
 }
 
+/* Turn the three bars into an X: 7px is one bar (2px) plus the gap (5px),
+   so the outer bars meet in the middle before rotating. */
 .navbar-toggle.is-open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
