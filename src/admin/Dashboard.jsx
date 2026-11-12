@@ -16,7 +16,7 @@ function Dashboard() {
       .select('*')
       .order('position', { ascending: true })
     if (fetchError) setError(fetchError.message)
-    else setPhotos(data)
+    else setPhotos(data || [])
     setLoading(false)
   }
 
