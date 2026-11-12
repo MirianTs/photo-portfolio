@@ -58,6 +58,17 @@ function Gallery() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [active, filtered.length])
 
+  // Keep the page behind the lightbox from scrolling while it is open.
+  const isOpen = active !== null
+  useEffect(() => {
+    if (!isOpen) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [isOpen])
+
   if (loading) {
     return (
       <p className="gallery-empty" role="status">
