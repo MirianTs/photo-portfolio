@@ -140,7 +140,14 @@ function Gallery() {
           aria-label="Photo viewer"
           onClick={() => setActive(null)}
         >
-          <button className="lightbox-close" aria-label="Close">
+          <button
+            className="lightbox-close"
+            aria-label="Close"
+            onClick={(e) => {
+              e.stopPropagation()
+              setActive(null)
+            }}
+          >
             ×
           </button>
           <button
