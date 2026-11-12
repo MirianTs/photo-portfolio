@@ -8,7 +8,7 @@ function Hero() {
       <div className="glow-blob hero-glow-2" aria-hidden="true" />
 
       <Reveal className="hero-badge">
-        <span className="hero-badge-dot" />
+        <span className="hero-badge-dot" aria-hidden="true" />
         Available for shoots
       </Reveal>
 
@@ -27,7 +27,9 @@ function Hero() {
       <Reveal delay={0.3} className="hero-actions">
         <a href="#gallery" className="hero-cta">
           View Gallery
-          <span className="hero-cta-arrow">→</span>
+          <span className="hero-cta-arrow" aria-hidden="true">
+            →
+          </span>
         </a>
         <a href="#contact" className="hero-cta hero-cta-ghost">
           Get In Touch
