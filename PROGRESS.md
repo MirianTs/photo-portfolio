@@ -4,6 +4,7 @@
 - 2026-07 (git-ის ისტორიიდან): Vite საიტი: navbar, hero, masonry გალერეა კატეგორიებით, about, contact; მუქი იისფერი დიზაინი; Supabase-ზე ფოტოების ადმინ პანელი; SEO (title/meta, Search Console); ფართო ეკრანების layout; favicon და logo პორტრეტის ფოტოთი.
 - 2026-07-26: GitHub Actions ყოველდღიური ავტომატური commit („chore: daily activity update“), contribution graph-ისთვის.
 - 2026-11-12 (SkillLAB): 40 მცირე გაუმჯობესება: README (გაშვება, Supabase, deploy, სტრუქტურა), meta თეგები, accessibility (alt/aria, reduced motion), .gitignore, ადმინში წაშლის შეცდომის დამუშავება, schema-ში position-ის ინდექსი. build გადის.
+- 2026-11-13 (SkillLAB): კიდევ 40 გაუმჯობესება: lightbox-ის ფოკუსი/scroll lock, მობილური მენიუ (Escape, გარეთ დაჭერა), main/section landmark-ები, reduced motion, ადმინში ატვირთვის/წაშლის/კატეგორიის შეცდომების დამუშავება, Supabase-ის გარეშე ცარიელი გვერდის ნაცვლად შეცდომა, CI-ში lint. lint და build გადის.
 
 ## დარჩა
 
