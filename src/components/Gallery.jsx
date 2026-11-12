@@ -18,6 +18,12 @@ function Gallery() {
   useEffect(() => {
     let cancelled = false
 
+    if (!supabase) {
+      setLoadError(true)
+      setLoading(false)
+      return
+    }
+
     supabase
       .from('photos')
       .select('id, url, category')

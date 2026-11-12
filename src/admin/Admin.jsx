@@ -8,6 +8,8 @@ function Admin() {
   const [session, setSession] = useState(undefined)
 
   useEffect(() => {
+    if (!supabase) return
+
     supabase.auth.getSession().then(({ data }) => setSession(data.session))
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
@@ -16,6 +18,14 @@ function Admin() {
 
     return () => listener.subscription.unsubscribe()
   }, [])
+
+  if (!supabase) {
+    return (
+      <div className="admin-shell admin-center">
+        <p className="admin-error">Supabase is not configured — see .env.example.</p>
+      </div>
+    )
+  }
 
   if (session === undefined) {
     return (

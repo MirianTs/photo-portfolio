@@ -10,4 +10,6 @@ if (!url || !anonKey) {
   )
 }
 
-export const supabase = createClient(url, anonKey)
+// createClient throws when the URL is missing, which would leave the whole
+// page blank. Export null instead so callers can show a proper error.
+export const supabase = url && anonKey ? createClient(url, anonKey) : null
