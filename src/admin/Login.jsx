@@ -11,9 +11,15 @@ function Login() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
-    setLoading(false)
-    if (signInError) setError(signInError.message)
+    try {
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+      if (signInError) setError(signInError.message)
+    } catch (err) {
+      // Network failures throw instead of returning an error object.
+      setError(err instanceof Error ? err.message : 'Sign-in failed.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
