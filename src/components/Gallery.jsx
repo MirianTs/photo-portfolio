@@ -13,6 +13,7 @@ function Gallery() {
   const [filter, setFilter] = useState('all')
   const [active, setActive] = useState(null)
   const closeButtonRef = useRef(null)
+  const lightboxRef = useRef(null)
 
   useEffect(() => {
     let cancelled = false
@@ -53,6 +54,23 @@ function Gallery() {
       if (e.key === 'Escape') setActive(null)
       if (e.key === 'ArrowRight') setActive((i) => wrapIndex(i + 1, filtered.length))
       if (e.key === 'ArrowLeft') setActive((i) => wrapIndex(i - 1, filtered.length))
+
+      // Keep Tab cycling through the lightbox buttons instead of the page behind it.
+      if (e.key === 'Tab' && lightboxRef.current) {
+        const buttons = [...lightboxRef.current.querySelectorAll('button')]
+        const first = buttons[0]
+        const last = buttons[buttons.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        } else if (!lightboxRef.current.contains(document.activeElement)) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
     }
 
     window.addEventListener('keydown', onKeyDown)
@@ -157,6 +175,7 @@ function Gallery() {
 
       {active !== null && filtered[active] && (
         <div
+          ref={lightboxRef}
           className="lightbox"
           role="dialog"
           aria-modal="true"
