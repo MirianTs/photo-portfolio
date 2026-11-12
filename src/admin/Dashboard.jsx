@@ -142,7 +142,11 @@ function Dashboard() {
         </label>
       </section>
 
-      {error && <p className="admin-error">{error}</p>}
+      {error && (
+        <p className="admin-error" role="alert">
+          {error}
+        </p>
+      )}
 
       {loading ? (
         <p role="status">Loading photos…</p>

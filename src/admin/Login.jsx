@@ -36,7 +36,11 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p className="admin-error">{error}</p>}
+        {error && (
+          <p className="admin-error" role="alert">
+            {error}
+          </p>
+        )}
         <button type="submit" disabled={loading}>
           {loading ? 'Signing in…' : 'Sign In'}
         </button>
