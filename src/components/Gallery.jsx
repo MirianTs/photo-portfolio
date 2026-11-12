@@ -126,7 +126,12 @@ function Gallery() {
   return (
     <>
       {categories.length > 1 && (
-        <Reveal as="div" className="gallery-filters">
+        <Reveal
+          as="div"
+          className="gallery-filters"
+          role="group"
+          aria-label="Filter photos by category"
+        >
           <button
             className={`gallery-filter ${filter === 'all' ? 'is-active' : ''}`}
             aria-pressed={filter === 'all'}
