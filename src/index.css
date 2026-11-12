@@ -166,3 +166,21 @@ a {
     padding: 64px 20px;
   }
 }
+
+/* respect users who ask the OS for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .glow-blob,
+  .hero-badge-dot {
+    animation: none;
+  }
+}
