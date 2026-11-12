@@ -63,7 +63,12 @@ function Dashboard() {
         position: nextPosition,
       })
 
-      if (insertError) setError(insertError.message)
+      if (insertError) {
+        setError(insertError.message)
+        // Without a row the file would never show up, so don't leave it in storage.
+        await supabase.storage.from('photos').remove([storagePath])
+        continue
+      }
       nextPosition += 1
     }
 
