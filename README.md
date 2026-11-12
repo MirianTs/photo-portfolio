@@ -67,3 +67,11 @@ with the Supabase user. From there you can:
 - rename a photo's category,
 - drag cards to change the gallery order,
 - delete photos (removes both the file and the database row).
+
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site
+and publishes `dist/` to GitHub Pages. The workflow reads the Supabase values
+from the repository secrets `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+It also copies `index.html` to `404.html` so that direct visits to `/admin`
+load the app instead of a GitHub 404 page.
