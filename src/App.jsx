@@ -10,39 +10,41 @@ function App() {
     <>
       <Navbar />
 
-      <section id="home" className="section">
-        <Hero />
-      </section>
+      <main id="main">
+        <section id="home" className="section">
+          <Hero />
+        </section>
 
-      <section id="gallery" className="section">
-        <Reveal>
-          <span className="eyebrow">Portfolio</span>
-          <h2 className="section-title">
-            Captured <em>Moments</em>
-          </h2>
-        </Reveal>
-        <Gallery />
-      </section>
+        <section id="gallery" className="section">
+          <Reveal>
+            <span className="eyebrow">Portfolio</span>
+            <h2 className="section-title">
+              Captured <em>Moments</em>
+            </h2>
+          </Reveal>
+          <Gallery />
+        </section>
 
-      <section id="about" className="section">
-        <Reveal>
-          <span className="eyebrow">About</span>
-          <h2 className="section-title">
-            Who I <em>Am</em>
-          </h2>
-        </Reveal>
-        <About />
-      </section>
+        <section id="about" className="section">
+          <Reveal>
+            <span className="eyebrow">About</span>
+            <h2 className="section-title">
+              Who I <em>Am</em>
+            </h2>
+          </Reveal>
+          <About />
+        </section>
 
-      <section id="contact" className="section">
-        <Reveal>
-          <span className="eyebrow">Contact</span>
-          <h2 className="section-title">
-            Let's <em>Connect</em>
-          </h2>
-        </Reveal>
-        <Contact />
-      </section>
+        <section id="contact" className="section">
+          <Reveal>
+            <span className="eyebrow">Contact</span>
+            <h2 className="section-title">
+              Let's <em>Connect</em>
+            </h2>
+          </Reveal>
+          <Contact />
+        </section>
+      </main>
     </>
   )
 }
