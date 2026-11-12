@@ -142,7 +142,7 @@ function Gallery() {
         >
           <button
             className="lightbox-close"
-            aria-label="Close"
+            aria-label="Close photo viewer"
             onClick={(e) => {
               e.stopPropagation()
               setActive(null)
@@ -152,7 +152,7 @@ function Gallery() {
           </button>
           <button
             className="lightbox-nav lightbox-prev"
-            aria-label="Previous"
+            aria-label="Previous photo"
             onClick={(e) => {
               e.stopPropagation()
               setActive((i) => wrapIndex(i - 1, filtered.length))
@@ -168,7 +168,7 @@ function Gallery() {
           />
           <button
             className="lightbox-nav lightbox-next"
-            aria-label="Next"
+            aria-label="Next photo"
             onClick={(e) => {
               e.stopPropagation()
               setActive((i) => wrapIndex(i + 1, filtered.length))
