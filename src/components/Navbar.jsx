@@ -24,6 +24,7 @@ function Navbar() {
           className={`navbar-toggle ${open ? 'is-open' : ''}`}
           aria-label="Toggle menu"
           aria-expanded={open}
+          aria-controls="navbar-links"
           onClick={() => setOpen((v) => !v)}
         >
           <span />
@@ -31,7 +32,7 @@ function Navbar() {
           <span />
         </button>
 
-        <nav className={`navbar-links ${open ? 'is-open' : ''}`}>
+        <nav id="navbar-links" className={`navbar-links ${open ? 'is-open' : ''}`}>
           {links.map((link) => (
             <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
               {link.label}
