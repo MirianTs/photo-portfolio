@@ -9,6 +9,9 @@ create table if not exists photos (
   created_at timestamptz not null default now()
 );
 
+-- The gallery and admin panel always sort by position.
+create index if not exists photos_position_idx on photos (position);
+
 alter table photos enable row level security;
 
 create policy "Public can read photos"
