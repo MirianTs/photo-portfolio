@@ -136,11 +136,19 @@ function Dashboard() {
     reordered.splice(index, 0, moved)
     setPhotos(reordered)
 
-    await Promise.all(
+    // Positions are rewritten as 0..n-1 for every photo, which also closes
+    // gaps left behind by deleted photos.
+    const results = await Promise.all(
       reordered.map((photo, i) =>
         supabase.from('photos').update({ position: i }).eq('id', photo.id),
       ),
     )
+    const failed = results.find((result) => result.error)
+    if (failed) {
+      setError(`Could not save the new order: ${failed.error.message}`)
+      // Reload so the list matches what is actually stored.
+      loadPhotos()
+    }
   }
 
   const handleLogout = () => supabase.auth.signOut()
