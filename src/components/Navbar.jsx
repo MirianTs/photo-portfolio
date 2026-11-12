@@ -32,7 +32,11 @@ function Navbar() {
           <span />
         </button>
 
-        <nav id="navbar-links" className={`navbar-links ${open ? 'is-open' : ''}`}>
+        <nav
+          id="navbar-links"
+          className={`navbar-links ${open ? 'is-open' : ''}`}
+          aria-label="Main"
+        >
           {links.map((link) => (
             <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
               {link.label}
