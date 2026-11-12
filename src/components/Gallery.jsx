@@ -122,7 +122,13 @@ function Gallery() {
       </div>
 
       {active !== null && filtered[active] && (
-        <div className="lightbox" onClick={() => setActive(null)}>
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo viewer"
+          onClick={() => setActive(null)}
+        >
           <button className="lightbox-close" aria-label="Close">
             ×
           </button>
