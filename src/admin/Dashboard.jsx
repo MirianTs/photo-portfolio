@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 
+// Supabase Storage rejects object keys with spaces, accents or non-Latin
+// letters, so only safe characters go into the file path. The category shown
+// in the gallery is stored unchanged in the database row.
+const safePathPart = (text) =>
+  text.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'file'
+
 function Dashboard() {
   const [photos, setPhotos] = useState([])
   const [loading, setLoading] = useState(true)
@@ -37,7 +43,7 @@ function Dashboard() {
 
     for (const file of files) {
       const cleanCategory = category.trim() || 'uncategorized'
-      const storagePath = `${cleanCategory}/${crypto.randomUUID()}-${file.name}`
+      const storagePath = `${safePathPart(cleanCategory)}/${crypto.randomUUID()}-${safePathPart(file.name)}`
 
       const { error: uploadError } = await supabase.storage
         .from('photos')
