@@ -22,6 +22,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          # Reuse the npm download cache between runs (keyed on package-lock.json).
+          cache: npm
       - run: npm ci
       # Stop the deploy if the linter or the unit tests find problems.
       - run: npm run lint
