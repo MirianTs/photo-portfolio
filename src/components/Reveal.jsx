@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 // `as` picks the rendered element, `delay` (seconds) staggers neighbours, and
 // any other props (aria-*, onClick, id…) are passed straight to the element.
 // The animation itself lives in the .reveal rules in index.css.
-function Reveal({ as: Tag = 'div', delay = 0, className = '', children, ...rest }) {
+function Reveal({ as: Tag = 'div', delay = 0, className = '', style, children, ...rest }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -36,8 +36,9 @@ function Reveal({ as: Tag = 'div', delay = 0, className = '', children, ...rest 
     <Tag
       ref={ref}
       className={`reveal ${className}`}
-      style={{ '--reveal-delay': `${delay}s` }}
       {...rest}
+      // Merge rather than replace, so a caller's style keeps the delay variable.
+      style={{ ...style, '--reveal-delay': `${delay}s` }}
     >
       {children}
     </Tag>
