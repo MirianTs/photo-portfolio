@@ -36,6 +36,7 @@ because of the `base` setting in `vite.config.js`.
 | `npm run build`   | Build the production site into `dist/`    |
 | `npm run preview` | Serve the built `dist/` folder locally    |
 | `npm run lint`    | Run Oxlint over the project               |
+| `npm test`        | Run the unit tests in `tests/` (node:test) |
 
 ## Environment variables
 
@@ -85,7 +86,8 @@ src/main.jsx          Entry point; picks the public site or the admin panel
 src/App.jsx           Public page layout (sections)
 src/components/       Navbar, Hero, Gallery, About, Contact, Reveal
 src/admin/            Admin login and dashboard
-src/lib/              Supabase client
+src/lib/              Supabase client and small shared helpers
+tests/                Unit tests for the helpers in src/lib (node --test)
 supabase/schema.sql   Database table and access policies
 public/               Static files copied as-is (favicons)
 ```
