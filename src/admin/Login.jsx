@@ -12,7 +12,12 @@ function Login() {
     setError('')
     setLoading(true)
     try {
-      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+      // Mobile keyboards and autofill often add a trailing space to the email,
+      // which Supabase rejects as invalid credentials.
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      })
       if (signInError) setError(signInError.message)
     } catch (err) {
       // Network failures throw instead of returning an error object.
