@@ -208,13 +208,17 @@ function Dashboard() {
     const reordered = [...photos]
     const [moved] = reordered.splice(from, 1)
     reordered.splice(index, 0, moved)
-    setPhotos(reordered)
 
-    // Positions are rewritten as 0..n-1 for every photo, which also closes
-    // gaps left behind by deleted photos.
+    // Positions become 0..n-1, which also closes gaps left behind by deleted
+    // photos. Only rows whose position actually changes are written, so moving
+    // one card a step costs two requests instead of one per photo.
+    const changed = reordered
+      .map((photo, i) => ({ photo, position: i }))
+      .filter(({ photo, position }) => photo.position !== position)
+    setPhotos(reordered.map((photo, i) => ({ ...photo, position: i })))
     const results = await Promise.all(
-      reordered.map((photo, i) =>
-        supabase.from('photos').update({ position: i }).eq('id', photo.id),
+      changed.map(({ photo, position }) =>
+        supabase.from('photos').update({ position }).eq('id', photo.id),
       ),
     )
     const failed = results.find((result) => result.error)
