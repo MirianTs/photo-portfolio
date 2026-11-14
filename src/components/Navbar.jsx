@@ -12,12 +12,17 @@ const links = [
 function Navbar() {
   const [open, setOpen] = useState(false)
   const headerRef = useRef(null)
+  const toggleRef = useRef(null)
 
   // Let keyboard users close the mobile menu with Escape.
   useEffect(() => {
     if (!open) return
     const onKeyDown = (e) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      // Focus may be on a menu link that is about to be hidden; put it back
+      // on the button that opened the menu so keyboard users are not lost.
+      if (headerRef.current?.contains(document.activeElement)) toggleRef.current?.focus()
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
@@ -42,6 +47,7 @@ function Navbar() {
         </a>
 
         <button
+          ref={toggleRef}
           className={`navbar-toggle ${open ? 'is-open' : ''}`}
           aria-label="Toggle menu"
           aria-expanded={open}
