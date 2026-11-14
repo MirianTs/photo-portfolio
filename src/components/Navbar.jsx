@@ -38,6 +38,19 @@ function Navbar() {
     return () => document.removeEventListener('pointerdown', onPointerDown)
   }, [open])
 
+  // The toggle only exists below 720px (see Navbar.css). If the window grows
+  // past that while the menu is open, close it so it is not still open the
+  // next time the window narrows.
+  useEffect(() => {
+    if (!open) return
+    const desktop = window.matchMedia('(min-width: 721px)')
+    const onChange = (e) => {
+      if (e.matches) setOpen(false)
+    }
+    desktop.addEventListener('change', onChange)
+    return () => desktop.removeEventListener('change', onChange)
+  }, [open])
+
   return (
     <header className="navbar" ref={headerRef}>
       <div className="navbar-inner">
