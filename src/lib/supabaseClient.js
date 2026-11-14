@@ -11,6 +11,16 @@ if (!url || !anonKey) {
   )
 }
 
-// createClient throws when the URL is missing, which would leave the whole
-// page blank. Export null instead so callers can show a proper error.
-export const supabase = url && anonKey ? createClient(url, anonKey) : null
+// createClient throws when the URL is missing or malformed, which would leave
+// the whole page blank. Export null instead so callers can show a proper error.
+function makeClient() {
+  if (!url || !anonKey) return null
+  try {
+    return createClient(url, anonKey)
+  } catch (err) {
+    console.error('Supabase client could not be created; check VITE_SUPABASE_URL.', err)
+    return null
+  }
+}
+
+export const supabase = makeClient()
