@@ -179,8 +179,11 @@ function Dashboard() {
     }
   }
 
-  const handleDragStart = (index) => {
+  const handleDragStart = (e, index) => {
     dragIndex.current = index
+    // Firefox only starts a drag when some data is attached to it.
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', String(index))
   }
 
   const handleDragOver = (e) => {
@@ -264,7 +267,7 @@ function Dashboard() {
             key={photo.id}
             className="admin-card"
             draggable
-            onDragStart={() => handleDragStart(index)}
+            onDragStart={(e) => handleDragStart(e, index)}
             onDragOver={handleDragOver}
             onDrop={() => handleDrop(index)}
           >
