@@ -92,10 +92,16 @@ function Gallery() {
   const isOpen = active !== null
   useEffect(() => {
     if (!isOpen) return
-    const previous = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    const { body } = document
+    const previous = { overflow: body.style.overflow, paddingRight: body.style.paddingRight }
+    // Hiding the overflow also removes the scrollbar on desktop browsers,
+    // which would shift the whole page sideways; pad by its width instead.
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    body.style.overflow = 'hidden'
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`
     return () => {
-      document.body.style.overflow = previous
+      body.style.overflow = previous.overflow
+      body.style.paddingRight = previous.paddingRight
     }
   }, [isOpen])
 
