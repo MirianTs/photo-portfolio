@@ -162,11 +162,21 @@ function Dashboard() {
     if (cleanCategory !== photo.category) handleCategoryChange(photo, cleanCategory)
     // Tabbing through the cards blurs every field; only write real changes.
     if (cleanCategory === categoryBeforeEdit.current) return
-    const { error: updateError } = await supabase
-      .from('photos')
-      .update({ category: cleanCategory })
-      .eq('id', photo.id)
-    if (updateError) setError(updateError.message)
+    let failure = null
+    try {
+      const { error: updateError } = await supabase
+        .from('photos')
+        .update({ category: cleanCategory })
+        .eq('id', photo.id)
+      if (updateError) failure = updateError.message
+    } catch (err) {
+      failure = err instanceof Error ? err.message : 'Could not save the category.'
+    }
+    if (failure) {
+      setError(failure)
+      // The card still shows the unsaved text; reload so it matches what is stored.
+      loadPhotos()
+    }
   }
 
   const handleDragStart = (index) => {
