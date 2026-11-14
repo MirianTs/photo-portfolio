@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    # Notes and the activity log do not change the built site.
+    paths-ignore:
+      - '**.md'
+      - '.github/activity/**'
   workflow_dispatch:
 
 permissions:
