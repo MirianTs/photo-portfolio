@@ -115,9 +115,11 @@ function Gallery() {
   useEffect(() => {
     if (!isOpen) return
     const opener = document.activeElement
+    // The grid cannot change while the lightbox covers it, so keep this node.
+    const grid = gridRef.current
     closeButtonRef.current?.focus()
     return () => {
-      const thumb = gridRef.current?.children[lastActive.current]
+      const thumb = grid?.children[lastActive.current]
       if (thumb instanceof HTMLElement) thumb.focus()
       else if (opener instanceof HTMLElement) opener.focus()
     }
