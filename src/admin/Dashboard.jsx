@@ -45,11 +45,17 @@ function Dashboard() {
     setUploading(true)
     setError('')
 
-    let nextPosition = photos.length
-      ? Math.max(...photos.map((p) => p.position)) + 1
-      : 0
-
     try {
+      // Ask the database for the current last position instead of trusting the
+      // list on screen, which is still empty if the upload starts before it loads.
+      const { data: lastRows, error: positionError } = await supabase
+        .from('photos')
+        .select('position')
+        .order('position', { ascending: false })
+        .limit(1)
+      if (positionError) throw positionError
+      let nextPosition = lastRows?.length ? lastRows[0].position + 1 : 0
+
       for (const file of files) {
         const cleanCategory = category.trim() || 'uncategorized'
         const storagePath = `${safePathPart(cleanCategory)}/${crypto.randomUUID()}-${safePathPart(file.name)}`
