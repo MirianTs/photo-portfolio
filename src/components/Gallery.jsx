@@ -107,6 +107,16 @@ function Gallery() {
     }
   }, [isOpen])
 
+  // Start loading the photos on either side of the open one, so stepping
+  // through the lightbox does not wait for each image to download.
+  useEffect(() => {
+    if (active === null || filtered.length < 2) return
+    for (const offset of [1, -1]) {
+      const neighbour = filtered[wrapIndex(active + offset, filtered.length)]
+      if (neighbour) new Image().src = neighbour.url
+    }
+  }, [active, filtered])
+
   if (loading) {
     return (
       <p className="gallery-empty" role="status">
