@@ -9,8 +9,12 @@ function Dashboard() {
   const [category, setCategory] = useState('uncategorized')
   const [error, setError] = useState('')
   const dragIndex = useRef(null)
+  const loadRequest = useRef(0)
 
   const loadPhotos = async () => {
+    // Uploads, failed saves and the first render can all trigger a reload.
+    // Number each request so a slow, older response cannot overwrite a newer one.
+    const request = ++loadRequest.current
     setLoading(true)
     try {
       const { data, error: fetchError } = await supabase
@@ -18,13 +22,15 @@ function Dashboard() {
         // Only the columns the dashboard reads; created_at is never shown.
         .select('id, url, storage_path, category, position')
         .order('position', { ascending: true })
+      if (request !== loadRequest.current) return
       if (fetchError) setError(fetchError.message)
       else setPhotos(data || [])
     } catch (err) {
+      if (request !== loadRequest.current) return
       // A dropped connection throws; without this "Loading photos…" never goes away.
       setError(err instanceof Error ? err.message : 'Could not load photos.')
     } finally {
-      setLoading(false)
+      if (request === loadRequest.current) setLoading(false)
     }
   }
 
