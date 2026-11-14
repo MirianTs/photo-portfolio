@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Values come from .env locally and from repository secrets in the deploy workflow.
-const url = import.meta.env.VITE_SUPABASE_URL
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+// Trim them: a secret pasted with a trailing newline or space breaks every request.
+const url = import.meta.env.VITE_SUPABASE_URL?.trim()
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim()
 
 if (!url || !anonKey) {
   console.error(
