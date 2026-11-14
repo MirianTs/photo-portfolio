@@ -54,7 +54,8 @@ Keep real values in `.env` (ignored by git), never in `.env.example`.
 1. Create a public storage bucket named `photos` (Storage > New bucket).
 2. Open the SQL Editor and run [`supabase/schema.sql`](supabase/schema.sql).
    It creates the `photos` table and the row-level security policies for the
-   table and the bucket.
+   table and the bucket. The script can be run again after it changes (for
+   example to add the position index); existing policies are replaced.
 3. Create an admin user under Authentication > Users. Any signed-in user can
    manage photos, so only add accounts you trust.
 
