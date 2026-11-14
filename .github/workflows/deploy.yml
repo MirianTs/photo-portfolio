@@ -23,8 +23,9 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      # Stop the deploy if the linter finds problems.
+      # Stop the deploy if the linter or the unit tests find problems.
       - run: npm run lint
+      - run: npm test
       - run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
