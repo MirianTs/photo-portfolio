@@ -108,18 +108,31 @@ function Dashboard() {
   const handleDelete = async (photo) => {
     if (!confirm('Delete this photo?')) return
     setError('')
-    const { error: deleteError } = await supabase.from('photos').delete().eq('id', photo.id)
-    if (deleteError) {
-      setError(deleteError.message)
+    try {
+      const { error: deleteError } = await supabase.from('photos').delete().eq('id', photo.id)
+      if (deleteError) {
+        setError(deleteError.message)
+        return
+      }
+    } catch (err) {
+      // A dropped connection throws instead of returning an error object.
+      setError(err instanceof Error ? err.message : 'Delete failed.')
       return
     }
-    // Only remove the file once the row is gone, so the gallery never points at a missing file.
-    const { error: removeError } = await supabase.storage
-      .from('photos')
-      .remove([photo.storage_path])
-    // The photo is already gone from the gallery; just report the leftover file.
-    if (removeError) setError(`Photo removed, but its file was not deleted: ${removeError.message}`)
+    // The row is gone from here on, so the card goes away even if removing
+    // the file fails below.
     setPhotos((prev) => prev.filter((p) => p.id !== photo.id))
+    try {
+      // Only remove the file once the row is gone, so the gallery never points at a missing file.
+      const { error: removeError } = await supabase.storage
+        .from('photos')
+        .remove([photo.storage_path])
+      // The photo is already gone from the gallery; just report the leftover file.
+      if (removeError) setError(`Photo removed, but its file was not deleted: ${removeError.message}`)
+    } catch (err) {
+      const reason = err instanceof Error ? err.message : 'network error'
+      setError(`Photo removed, but its file was not deleted: ${reason}`)
+    }
   }
 
   // Typing only updates the card; the new category is saved once the field
