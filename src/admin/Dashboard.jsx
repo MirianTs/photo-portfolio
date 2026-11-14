@@ -10,6 +10,8 @@ function Dashboard() {
   const [error, setError] = useState('')
   const dragIndex = useRef(null)
   const loadRequest = useRef(0)
+  // Category of the card being edited, as it was when the field got focus.
+  const categoryBeforeEdit = useRef(null)
 
   const loadPhotos = async () => {
     // Uploads, failed saves and the first render can all trigger a reload.
@@ -158,6 +160,8 @@ function Dashboard() {
     // Same rule as uploads: a blank category falls back to "uncategorized".
     const cleanCategory = photo.category.trim() || 'uncategorized'
     if (cleanCategory !== photo.category) handleCategoryChange(photo, cleanCategory)
+    // Tabbing through the cards blurs every field; only write real changes.
+    if (cleanCategory === categoryBeforeEdit.current) return
     const { error: updateError } = await supabase
       .from('photos')
       .update({ category: cleanCategory })
@@ -260,6 +264,7 @@ function Dashboard() {
               className="admin-card-category"
               aria-label="Photo category"
               value={photo.category}
+              onFocus={() => (categoryBeforeEdit.current = photo.category)}
               onChange={(e) => handleCategoryChange(photo, e.target.value)}
               onBlur={() => handleCategorySave(photo)}
             />
