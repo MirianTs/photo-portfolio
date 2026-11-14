@@ -69,7 +69,9 @@ function Dashboard() {
 
         const { error: uploadError } = await supabase.storage
           .from('photos')
-          .upload(storagePath, file)
+          // Every path contains a fresh UUID, so a file never changes once
+          // uploaded and browsers may cache it for a year (default: 1 hour).
+          .upload(storagePath, file, { cacheControl: '31536000' })
 
         if (uploadError) {
           setError(uploadError.message)
