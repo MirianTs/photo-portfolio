@@ -57,6 +57,13 @@ function Dashboard() {
       let nextPosition = lastRows?.length ? lastRows[0].position + 1 : 0
 
       for (const file of files) {
+        // accept="image/*" is only a hint: the file picker's "All files" option
+        // and drag-and-drop onto the input can still hand over other files.
+        if (!file.type.startsWith('image/')) {
+          setError(`${file.name} is not an image and was skipped.`)
+          continue
+        }
+
         const cleanCategory = category.trim() || 'uncategorized'
         const storagePath = `${safePathPart(cleanCategory)}/${crypto.randomUUID()}-${safePathPart(file.name)}`
 
