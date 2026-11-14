@@ -57,6 +57,8 @@ function Gallery() {
     if (active === null) return
 
     const onKeyDown = (e) => {
+      // Leave browser shortcuts such as Alt+Left (back) alone.
+      if (e.altKey || e.ctrlKey || e.metaKey) return
       if (e.key === 'Escape') setActive(null)
       if (e.key === 'ArrowRight') setActive((i) => wrapIndex(i + 1, filtered.length))
       if (e.key === 'ArrowLeft') setActive((i) => wrapIndex(i - 1, filtered.length))
