@@ -309,7 +309,11 @@ function Dashboard() {
               onChange={(e) => handleCategoryChange(photo, e.target.value)}
               onBlur={() => handleCategorySave(photo)}
             />
-            <button className="admin-btn admin-btn-danger" onClick={() => handleDelete(photo)}>
+            <button
+              className="admin-btn admin-btn-danger"
+              aria-label={`Delete photo ${index + 1}`}
+              onClick={() => handleDelete(photo)}
+            >
               Delete
             </button>
           </div>
