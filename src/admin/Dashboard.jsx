@@ -216,14 +216,20 @@ function Dashboard() {
       .map((photo, i) => ({ photo, position: i }))
       .filter(({ photo, position }) => photo.position !== position)
     setPhotos(reordered.map((photo, i) => ({ ...photo, position: i })))
-    const results = await Promise.all(
-      changed.map(({ photo, position }) =>
-        supabase.from('photos').update({ position }).eq('id', photo.id),
-      ),
-    )
-    const failed = results.find((result) => result.error)
-    if (failed) {
-      setError(`Could not save the new order: ${failed.error.message}`)
+    let failure = null
+    try {
+      const results = await Promise.all(
+        changed.map(({ photo, position }) =>
+          supabase.from('photos').update({ position }).eq('id', photo.id),
+        ),
+      )
+      failure = results.find((result) => result.error)?.error.message ?? null
+    } catch (err) {
+      // A dropped connection throws instead of returning an error object.
+      failure = err instanceof Error ? err.message : 'network error'
+    }
+    if (failure) {
+      setError(`Could not save the new order: ${failure}`)
       // Reload so the list matches what is actually stored.
       loadPhotos()
     }
