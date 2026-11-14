@@ -33,6 +33,16 @@ jobs:
       # Stop the deploy if the linter or the unit tests find problems.
       - run: npm run lint
       - run: npm test
+      # Without these secrets the site still builds, but the gallery can only
+      # show an error, so flag it on the workflow run.
+      - name: Check Supabase secrets
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ] || [ -z "$VITE_SUPABASE_ANON_KEY" ]; then
+            echo "::warning::VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY is not set; the deployed gallery will not load."
+          fi
       - run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
