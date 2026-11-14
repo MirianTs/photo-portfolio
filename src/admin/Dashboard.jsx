@@ -186,6 +186,13 @@ function Dashboard() {
     e.dataTransfer.setData('text/plain', String(index))
   }
 
+  // A drag dropped outside any card never reaches handleDrop; forget it so a
+  // later drop (for example a file dragged in from the desktop) is not
+  // mistaken for this card being moved.
+  const handleDragEnd = () => {
+    dragIndex.current = null
+  }
+
   const handleDragOver = (e) => {
     e.preventDefault()
   }
@@ -268,6 +275,7 @@ function Dashboard() {
             className="admin-card"
             draggable
             onDragStart={(e) => handleDragStart(e, index)}
+            onDragEnd={handleDragEnd}
             onDragOver={handleDragOver}
             onDrop={() => handleDrop(index)}
           >
