@@ -12,13 +12,19 @@ function Dashboard() {
 
   const loadPhotos = async () => {
     setLoading(true)
-    const { data, error: fetchError } = await supabase
-      .from('photos')
-      .select('*')
-      .order('position', { ascending: true })
-    if (fetchError) setError(fetchError.message)
-    else setPhotos(data || [])
-    setLoading(false)
+    try {
+      const { data, error: fetchError } = await supabase
+        .from('photos')
+        .select('*')
+        .order('position', { ascending: true })
+      if (fetchError) setError(fetchError.message)
+      else setPhotos(data || [])
+    } catch (err) {
+      // A dropped connection throws; without this "Loading photos…" never goes away.
+      setError(err instanceof Error ? err.message : 'Could not load photos.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
