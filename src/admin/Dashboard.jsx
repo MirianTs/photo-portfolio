@@ -303,7 +303,7 @@ function Dashboard() {
             <input
               type="text"
               className="admin-card-category"
-              aria-label="Photo category"
+              aria-label={`Category of photo ${index + 1}`}
               value={photo.category}
               onFocus={() => (categoryBeforeEdit.current = photo.category)}
               onChange={(e) => handleCategoryChange(photo, e.target.value)}
