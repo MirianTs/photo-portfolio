@@ -235,7 +235,14 @@ function Dashboard() {
     }
   }
 
-  const handleLogout = () => supabase.auth.signOut()
+  const handleLogout = async () => {
+    try {
+      const { error: signOutError } = await supabase.auth.signOut()
+      if (signOutError) setError(signOutError.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Log out failed.')
+    }
+  }
 
   return (
     <div className="admin-dashboard">
