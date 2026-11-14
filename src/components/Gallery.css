@@ -125,7 +125,8 @@
 
 .lightbox-image {
   max-width: min(90vw, 1200px);
-  max-height: 85vh;
+  /* dvh follows mobile browser toolbars; 85vh could push the photo under them */
+  max-height: 85dvh;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: var(--shadow);
