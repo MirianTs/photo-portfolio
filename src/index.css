@@ -58,6 +58,8 @@ body {
 }
 
 #root {
+  /* vh first for browsers without the small-viewport svh unit (before 2022) */
+  min-height: 100vh;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
