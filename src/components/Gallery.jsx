@@ -12,6 +12,9 @@ function Gallery() {
   const [active, setActive] = useState(null)
   const closeButtonRef = useRef(null)
   const lightboxRef = useRef(null)
+  const gridRef = useRef(null)
+  // Index of the photo the lightbox showed last, read when it closes.
+  const lastActive = useRef(null)
 
   useEffect(() => {
     let cancelled = false
@@ -96,14 +99,21 @@ function Gallery() {
     }
   }, [isOpen])
 
-  // Move keyboard focus into the lightbox when it opens and give it back to
-  // the thumbnail that opened it when it closes.
+  useEffect(() => {
+    if (active !== null) lastActive.current = active
+  }, [active])
+
+  // Move keyboard focus into the lightbox when it opens. When it closes, focus
+  // the thumbnail of the photo shown last (the user may have stepped away from
+  // the one they opened), falling back to whatever opened the lightbox.
   useEffect(() => {
     if (!isOpen) return
     const opener = document.activeElement
     closeButtonRef.current?.focus()
     return () => {
-      if (opener instanceof HTMLElement) opener.focus()
+      const thumb = gridRef.current?.children[lastActive.current]
+      if (thumb instanceof HTMLElement) thumb.focus()
+      else if (opener instanceof HTMLElement) opener.focus()
     }
   }, [isOpen])
 
@@ -176,7 +186,7 @@ function Gallery() {
         </Reveal>
       )}
 
-      <div className="gallery-grid">
+      <div className="gallery-grid" ref={gridRef}>
         {filtered.map((photo, i) => (
           <Reveal
             as="button"
