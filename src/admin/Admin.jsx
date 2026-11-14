@@ -12,10 +12,14 @@ function Admin() {
 
     // If the session check fails (e.g. offline), fall back to the login form
     // instead of showing "Loading…" forever.
+    // onAuthStateChange below can report a sign-in or sign-out before this
+    // first check resolves, so only use its result if nothing newer arrived.
+    const setInitial = (initial) =>
+      setSession((current) => (current === undefined ? initial : current))
     supabase.auth
       .getSession()
-      .then(({ data }) => setSession(data.session))
-      .catch(() => setSession(null))
+      .then(({ data }) => setInitial(data.session))
+      .catch(() => setInitial(null))
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession)
