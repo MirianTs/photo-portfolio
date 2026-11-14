@@ -38,8 +38,10 @@
   font: inherit;
 }
 
+/* A transparent outline is invisible normally but is drawn in Windows High
+   Contrast (forced colors) mode, where the border colour change is lost. */
 .admin-login input:focus {
-  outline: none;
+  outline: 2px solid transparent;
   border-color: var(--accent);
 }
 
@@ -125,7 +127,7 @@
 }
 
 .admin-upload input[type='text']:focus {
-  outline: none;
+  outline: 2px solid transparent;
   border-color: var(--accent);
 }
 
@@ -180,7 +182,7 @@
 }
 
 .admin-card-category:focus {
-  outline: none;
+  outline: 2px solid transparent;
   border-color: var(--accent);
 }
 
