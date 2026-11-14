@@ -197,7 +197,10 @@ function Dashboard() {
     e.preventDefault()
   }
 
-  const handleDrop = async (index) => {
+  const handleDrop = async (e, index) => {
+    // Cards accept drops (see handleDragOver), so without this a photo file
+    // dragged in from the desktop would make the browser leave the page to open it.
+    e.preventDefault()
     const from = dragIndex.current
     dragIndex.current = null
     if (from === null || from === index) return
@@ -277,7 +280,7 @@ function Dashboard() {
             onDragStart={(e) => handleDragStart(e, index)}
             onDragEnd={handleDragEnd}
             onDragOver={handleDragOver}
-            onDrop={() => handleDrop(index)}
+            onDrop={(e) => handleDrop(e, index)}
           >
             <img src={photo.url} alt="" loading="lazy" decoding="async" />
             <input
