@@ -15,7 +15,8 @@ function Dashboard() {
     try {
       const { data, error: fetchError } = await supabase
         .from('photos')
-        .select('*')
+        // Only the columns the dashboard reads; created_at is never shown.
+        .select('id, url, storage_path, category, position')
         .order('position', { ascending: true })
       if (fetchError) setError(fetchError.message)
       else setPhotos(data || [])
