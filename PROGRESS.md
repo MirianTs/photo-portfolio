@@ -5,6 +5,7 @@
 - 2026-07-26: GitHub Actions ყოველდღიური ავტომატური commit („chore: daily activity update“), contribution graph-ისთვის.
 - 2026-11-12 (SkillLAB): 40 მცირე გაუმჯობესება: README (გაშვება, Supabase, deploy, სტრუქტურა), meta თეგები, accessibility (alt/aria, reduced motion), .gitignore, ადმინში წაშლის შეცდომის დამუშავება, schema-ში position-ის ინდექსი. build გადის.
 - 2026-11-13 (SkillLAB): კიდევ 40 გაუმჯობესება: lightbox-ის ფოკუსი/scroll lock, მობილური მენიუ (Escape, გარეთ დაჭერა), main/section landmark-ები, reduced motion, ადმინში ატვირთვის/წაშლის/კატეგორიის შეცდომების დამუშავება, Supabase-ის გარეშე ცარიელი გვერდის ნაცვლად შეცდომა, CI-ში lint. lint და build გადის.
+- 2026-11-14 (SkillLAB): კიდევ ~47 გაუმჯობესება: ადმინში ქსელის შეცდომების დამუშავება (ჩატვირთვა/წაშლა/კატეგორია/რიგი/გასვლა), drag-and-drop Firefox-ში, მხოლოდ შეცვლილი პოზიციების შენახვა, lightbox-ის ფოკუსი და მეზობელი ფოტოების წინასწარ ჩატვირთვა, მობილური მენიუს გაუმჯობესება, schema.sql ხელახლა გაშვებადი, unit ტესტები (npm test) და CI-ში Node 22, ტესტები, npm cache. lint, ტესტები და build გადის.
 
 ## დარჩა
 
