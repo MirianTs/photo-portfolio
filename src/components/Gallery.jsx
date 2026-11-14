@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
+import { wrapIndex } from '../lib/wrapIndex.js'
 import Reveal from './Reveal.jsx'
 import './Gallery.css'
-
-// Step through the photos in a loop: past the last one comes the first again.
-const wrapIndex = (index, length) => (index + length) % length
 
 function Gallery() {
   const [photos, setPhotos] = useState([])
