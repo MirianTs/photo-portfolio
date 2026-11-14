@@ -10,9 +10,11 @@ permissions:
   pages: write
   id-token: write
 
+# Queue deploys instead of cancelling one that is already publishing, as
+# GitHub recommends for Pages: a cancelled deploy can leave the site half-updated.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
