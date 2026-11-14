@@ -1,12 +1,10 @@
 .admin-shell {
-  min-height: 100vh; /* fallback for browsers without svh */
   min-height: 100svh;
   background: var(--bg);
   color: var(--text);
 }
 
 .admin-center {
-  min-height: 100vh; /* fallback for browsers without svh */
   min-height: 100svh;
   display: flex;
   align-items: center;
