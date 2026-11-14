@@ -109,9 +109,20 @@ function Dashboard() {
     if (!confirm('Delete this photo?')) return
     setError('')
     try {
-      const { error: deleteError } = await supabase.from('photos').delete().eq('id', photo.id)
+      // Row-level security silently skips rows the user may not delete, with
+      // no error, so ask for the deleted row back to know it really went.
+      const { data: deleted, error: deleteError } = await supabase
+        .from('photos')
+        .delete()
+        .eq('id', photo.id)
+        .select('id')
       if (deleteError) {
         setError(deleteError.message)
+        return
+      }
+      if (!deleted?.length) {
+        setError('The photo could not be deleted (it may already be gone). Reloading the list.')
+        loadPhotos()
         return
       }
     } catch (err) {
