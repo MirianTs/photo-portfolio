@@ -72,8 +72,10 @@ with the Supabase user. From there you can:
 
 ## Deployment
 
-Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site
-and publishes `dist/` to GitHub Pages. The workflow reads the Supabase values
+Every push to `main` runs `.github/workflows/deploy.yml`, which lints, tests and
+builds the site, then publishes `dist/` to GitHub Pages. Pushes that only change
+Markdown files or the activity log are skipped; use "Run workflow" on the
+Actions tab to deploy by hand. The workflow reads the Supabase values
 from the repository secrets `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 It also copies `index.html` to `404.html` so that direct visits to `/admin`
 load the app instead of a GitHub 404 page.
@@ -89,5 +91,6 @@ src/admin/            Admin login and dashboard
 src/lib/              Supabase client and small shared helpers
 tests/                Unit tests for the helpers in src/lib (node --test)
 supabase/schema.sql   Database table and access policies
+.github/workflows/    deploy.yml (GitHub Pages) and daily-commit.yml (activity log)
 public/               Static files copied as-is (favicons)
 ```
