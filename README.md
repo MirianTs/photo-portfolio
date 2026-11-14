@@ -17,7 +17,7 @@ and managed through a small admin panel.
 
 ## Getting started
 
-Requirements: Node.js 20 or newer.
+Requirements: Node.js 20.19+ or 22.12+ (the versions Vite 8 supports; CI uses 22).
 
 ```sh
 npm install
