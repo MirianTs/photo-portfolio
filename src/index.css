@@ -198,3 +198,13 @@ a {
     animation: none;
   }
 }
+
+/* Sections that were never scrolled into view are still transparent, so
+   printing or saving the page as PDF would leave them blank. */
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
