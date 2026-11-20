@@ -237,32 +237,37 @@ function Gallery() {
           >
             ×
           </button>
-          <button
-            className="lightbox-nav lightbox-prev"
-            aria-label="Previous photo"
-            onClick={(e) => {
-              e.stopPropagation()
-              setActive((i) => wrapIndex(i - 1, filtered.length))
-            }}
-          >
-            ‹
-          </button>
+          {/* With a single photo the arrows would do nothing, so leave them out. */}
+          {filtered.length > 1 && (
+            <button
+              className="lightbox-nav lightbox-prev"
+              aria-label="Previous photo"
+              onClick={(e) => {
+                e.stopPropagation()
+                setActive((i) => wrapIndex(i - 1, filtered.length))
+              }}
+            >
+              ‹
+            </button>
+          )}
           <img
             className="lightbox-image"
             src={filtered[active].url}
             alt={`${filtered[active].category}, ${active + 1} of ${filtered.length}`}
             onClick={(e) => e.stopPropagation()}
           />
-          <button
-            className="lightbox-nav lightbox-next"
-            aria-label="Next photo"
-            onClick={(e) => {
-              e.stopPropagation()
-              setActive((i) => wrapIndex(i + 1, filtered.length))
-            }}
-          >
-            ›
-          </button>
+          {filtered.length > 1 && (
+            <button
+              className="lightbox-nav lightbox-next"
+              aria-label="Next photo"
+              onClick={(e) => {
+                e.stopPropagation()
+                setActive((i) => wrapIndex(i + 1, filtered.length))
+              }}
+            >
+              ›
+            </button>
+          )}
         </div>
       )}
     </>
