@@ -7,6 +7,12 @@ import './admin.css'
 function Admin() {
   const [session, setSession] = useState(undefined)
 
+  // index.html carries the public site title; name the tab after the admin
+  // panel so it is easy to tell apart from the portfolio.
+  useEffect(() => {
+    document.title = 'Photo Admin — Mirian Tsartsidze'
+  }, [])
+
   useEffect(() => {
     if (!supabase) return
 
