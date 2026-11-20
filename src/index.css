@@ -94,6 +94,13 @@ a {
   color: inherit;
 }
 
+/* The browser's default focus ring is hard to see on the dark purple
+   background, so keyboard focus uses the accent colour instead. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .section {
   width: 100%;
   max-width: min(1680px, 94vw);
