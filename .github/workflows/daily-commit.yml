@@ -11,6 +11,8 @@ permissions:
 jobs:
   commit:
     runs-on: ubuntu-latest
+    # Appending one line takes seconds; don't let a stuck push run for hours.
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
