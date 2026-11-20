@@ -37,7 +37,9 @@ function Admin() {
   if (!supabase) {
     return (
       <div className="admin-shell admin-center">
-        <p className="admin-error">Supabase is not configured — see .env.example.</p>
+        <p className="admin-error" role="alert">
+          Supabase is not configured — see .env.example.
+        </p>
       </div>
     )
   }
