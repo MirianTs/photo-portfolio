@@ -253,7 +253,7 @@ function Dashboard() {
         </button>
       </header>
 
-      <section className="admin-upload">
+      <section className="admin-upload" aria-label="Upload photos">
         <input
           type="text"
           placeholder="Category (e.g. nature, street)"
