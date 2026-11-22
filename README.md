@@ -6,7 +6,8 @@ The live site is published on GitHub Pages at
 
 The page has a hero section, a masonry photo gallery with category filters and a
 lightbox, an about section and a contact section. Photos are stored in Supabase
-and managed through a small admin panel.
+and managed through a small admin panel. In the lightbox, the arrow keys step
+through the photos and Escape closes it.
 
 ## Tech stack
 
