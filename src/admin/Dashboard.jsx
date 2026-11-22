@@ -57,6 +57,8 @@ function Dashboard() {
         .limit(1)
       if (positionError) throw positionError
       let nextPosition = lastRows?.length ? lastRows[0].position + 1 : 0
+      // The same category applies to every file in this batch.
+      const cleanCategory = category.trim() || 'uncategorized'
 
       for (const file of files) {
         // accept="image/*" is only a hint: the file picker's "All files" option
@@ -66,7 +68,6 @@ function Dashboard() {
           continue
         }
 
-        const cleanCategory = category.trim() || 'uncategorized'
         const storagePath = `${safePathPart(cleanCategory)}/${crypto.randomUUID()}-${safePathPart(file.name)}`
 
         const { error: uploadError } = await supabase.storage
