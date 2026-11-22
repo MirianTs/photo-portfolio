@@ -55,7 +55,7 @@ function Navbar() {
     <header className="navbar" ref={headerRef}>
       <div className="navbar-inner">
         <a href="#home" className="navbar-brand">
-          <img src={logo} className="navbar-mark" alt="" aria-hidden="true" />
+          <img src={logo} className="navbar-mark" alt="" />
           Mirian Tsartsidze
         </a>
 
