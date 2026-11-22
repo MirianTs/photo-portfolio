@@ -5,6 +5,11 @@ on:
     - cron: '0 8 * * *'
   workflow_dispatch:
 
+# Never run two of these at once: both would try to push to main.
+concurrency:
+  group: daily-commit
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
