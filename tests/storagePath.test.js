@@ -23,3 +23,7 @@ test('falls back to "file" when nothing safe is left', () => {
   assert.equal(safePathPart(''), 'file')
   assert.equal(safePathPart('***'), 'file')
 })
+
+test('keeps letter case, dots, underscores and dashes', () => {
+  assert.equal(safePathPart('My.Photo_v2-final.PNG'), 'My.Photo_v2-final.PNG')
+})
