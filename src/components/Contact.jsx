@@ -1,6 +1,12 @@
 import Reveal from './Reveal.jsx'
 import './Contact.css'
 
+// Fill in an href to show that profile; entries left empty stay hidden.
+const socials = [
+  { label: 'Instagram', href: 'https://www.instagram.com/fury_cyber/' },
+  { label: 'Behance', href: '' },
+]
+
 function Contact() {
   return (
     <Reveal as="div" className="contact-info">
@@ -17,14 +23,15 @@ function Contact() {
       </a>
 
       <div className="contact-socials">
-        <a href="https://www.instagram.com/fury_cyber/" target="_blank" rel="noreferrer">
-          Instagram
-          <span className="visually-hidden"> (opens in a new tab)</span>
-        </a>
-        <a href="#" target="_blank" rel="noreferrer">
-          Behance
-          <span className="visually-hidden"> (opens in a new tab)</span>
-        </a>
+        {socials
+          // A link without a real address would only reopen this page in a new tab.
+          .filter((social) => social.href)
+          .map((social) => (
+            <a key={social.label} href={social.href} target="_blank" rel="noreferrer">
+              {social.label}
+              <span className="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          ))}
       </div>
     </Reveal>
   )
