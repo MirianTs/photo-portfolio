@@ -299,7 +299,12 @@ function Dashboard() {
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, index)}
           >
-            <img src={photo.url} alt="" loading="lazy" decoding="async" />
+            <img
+              src={photo.url}
+              alt={`Photo ${index + 1} (${photo.category})`}
+              loading="lazy"
+              decoding="async"
+            />
             <input
               type="text"
               className="admin-card-category"
