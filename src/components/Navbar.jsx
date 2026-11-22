@@ -62,7 +62,7 @@ function Navbar() {
         <button
           ref={toggleRef}
           className={`navbar-toggle ${open ? 'is-open' : ''}`}
-          aria-label="Toggle menu"
+          aria-label="Menu"
           aria-expanded={open}
           aria-controls="navbar-links"
           onClick={() => setOpen((v) => !v)}
