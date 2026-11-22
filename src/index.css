@@ -74,8 +74,7 @@ h3 {
   margin: 0;
 }
 
-em,
-.accent-serif {
+em {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
