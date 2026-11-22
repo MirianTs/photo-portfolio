@@ -65,7 +65,8 @@ Keep real values in `.env` (ignored by git), never in `.env.example`.
 Open `/photo-portfolio/admin` (the same path on the dev server) and sign in
 with the Supabase user. From there you can:
 
-- upload one or more photos into a category,
+- upload one or more photos into a category (a blank category becomes
+  `uncategorized`),
 - rename a photo's category,
 - drag cards to change the gallery order,
 - delete photos (removes both the file and the database row).
